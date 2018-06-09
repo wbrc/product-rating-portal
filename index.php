@@ -6,6 +6,11 @@ spl_autoload_register(function ($class) {
         require_once ($file);
     }
 });
-\Framework\Injector::register(\DataLayer\DataLayer::class, false, \DataLayer\MockDataLayer::class);
+\Framework\Injector::register(\DataLayer\DataLayer::class, false, \DataLayer\DBDataLayer::class, array(
+    'server' => 'localhost',
+    'userName' => 'root',
+    'password' => '',
+    'database' => 'ratingportal'
+));
 \Framework\Injector::register(\BusinessLogic\Session::class, true);
 \Framework\MVC::handleRequest();

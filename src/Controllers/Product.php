@@ -15,6 +15,7 @@ class Product extends \Framework\Controller
         return $this->renderView('product', array(
             'user' => $this->authenticationManager->getAuthenticatedUser(),
             'product' => $this->dataLayer->getProductById($this->getParam('pid')),
+            'score' => $this->dataLayer->getAvarageRating($this->getParam('pid')),
             'ratings' => $this->dataLayer->getRatingsByProductId($this->getParam('pid'))
         ));
     }

@@ -13,8 +13,8 @@ class MockDataLayer implements DataLayer
 
     public function __construct()
     {
-        $this->__users = array(1 => new User(1, "test"),
-            2 => new User(2, "smitty"));
+        $this->__users = array(1 => new User(1, "test", "asdf"),
+            2 => new User(2, "smitty", "numberone"));
         $this->__products = array(1 => new Product(1, "IPhone 6", 1, "Apple", "A smartphone"));
         $this->__ratings = array(1 => new Rating(1, 1, 1, 4, "Gut aber nicht perfekt"),
             2 => new Rating(2, 1, 2, 5, "iphone is so geil man"));
@@ -30,7 +30,7 @@ class MockDataLayer implements DataLayer
     public function getUserForUserNameAndPassword($userName, $password)
     {
         foreach ($this->__users as $user) {
-            if ($user->getUserName() == $userName && $userName == $password) {
+            if ($user->getUserName() == $userName && $user->getPassword() == $password) {
                 return $user;
             }
         }
@@ -38,7 +38,8 @@ class MockDataLayer implements DataLayer
     }
 
     public function createUser($userName, $password){
-        return false;
+        $user = new User(count($__users), $userName, $password);
+        array_push($__users, $user);
     }
 
 

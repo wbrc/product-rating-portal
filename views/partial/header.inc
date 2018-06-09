@@ -21,7 +21,9 @@
                 </div>
                 <div id="navbar" class="collapse navbar-collapse">
                     <ul class="nav navbar-nav">
-                        <li><?php self::actionLink('Home', 'Index', 'Home'); ?></li>
+                        <?php if(isset($model['user'])) { ?>
+                        <li><?php self::actionLink('Home', 'Index', 'UserHome'); ?></li>
+                        <?php } ?>
                     </ul>
                     <div class="navbar-right">
                         <?php self::renderView('partial/user', $model['user']); ?>
