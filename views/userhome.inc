@@ -18,6 +18,7 @@
                 </td>
                 <td>
                     <?php self::actionLink("delete", 'Delete', 'NewProduct', array('pid' => $product->getId()));?>
+                    <?php self::actionLink("update", 'Update', 'NewProduct', array('pid' => $product->getId()));?>
                 </td>
             </tr>
             <?php }?>
@@ -46,6 +47,7 @@
                 </td>
                 <td>
                 <?php self::actionLink("delete", 'Delete', 'NewRating', array('rid' => $rating[1]->getId()));?>
+                <?php self::actionLink("update", 'Update', 'NewRating', array('rid' => $rating[1]->getId(), 'pid' => $rating[0]->getId()));?>
                 </td>
             </tr>
             <?php }?>

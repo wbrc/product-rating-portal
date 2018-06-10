@@ -55,6 +55,14 @@ class User extends \Framework\Controller
 
     public function POST_Register()
     {
+        if ($this->getParam(self::PARAM_USER_NAME) == "" || $this->getParam(self::PARAM_PASSWORD) == ""){
+            return $this->renderView('register', array(
+                'user' => $this->authenticationManager->getAuthenticatedUser(),
+                'userName' => $this->getParam(self::PARAM_USER_NAME),
+                'errors' => array('invalid username or password'),
+            ));
+        }
+
         if ($this->dataLayer->createUser(
             $this->getParam(self::PARAM_USER_NAME),
             $this->getParam(self::PARAM_PASSWORD))) {

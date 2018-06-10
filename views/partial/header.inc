@@ -5,7 +5,7 @@
         <title>Product rating portal</title>
         <link href="css/bootstrap.min.css" rel="stylesheet">
         <link href="css/bootstrap-theme.min.css" rel="stylesheet">
-        <link href="css/BookShop.css" rel="stylesheet">
+        <link href="css/ratingportal.css" rel="stylesheet">
     </head>
     <body>
         <nav class="navbar navbar-inverse navbar-fixed-top">

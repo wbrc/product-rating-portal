@@ -300,4 +300,46 @@ class DBDataLayer implements DataLayer
         $res->close();
         $conn->close();
     }
+
+    public function updateProduct($pid, $productName, $manufacturer, $uid){
+        $conn = $this->getConnection();
+        $res = $this->executeStatement($conn, 'UPDATE `Product` SET Name = ?, Manufacturer = ? WHERE ID = ? AND created_by = ?',
+            function ($s) use ($pid, $productName, $manufacturer, $uid) {
+                $s->bind_param('ssis', $productName, $manufacturer, $pid, $uid);
+            }
+        );
+        $res->close();
+        $conn->close();
+        return $pid;
+    }
+
+    public function getRatingById($rid){
+        $ratings = array();
+
+        $conn = $this->getConnection();
+        $res = $this->executeStatement($conn, 'SELECT ID, created_by, created_for, Score, Comment FROM Rating WHERE ID = ?',
+            function ($s) use ($rid) {
+                $s->bind_param('i', $rid);
+            }
+        );
+        $res->bind_result($ID, $created_by, $created_for, $Score, $Comment);
+        while ($res->fetch()) {
+            $ratings[] = new Rating($ID, $created_for, $created_by, $Score, $Comment);
+        }
+        $res->close();
+        $conn->close();
+        return $ratings[0];
+    }
+
+    public function updateRating($rid, $uid, $score, $comment){
+        $conn = $this->getConnection();
+        $res = $this->executeStatement($conn, 'UPDATE `Rating` SET Score = ?, Comment = ? WHERE ID = ? AND created_by = ?',
+            function ($s) use ($score, $comment, $rid, $uid) {
+                $s->bind_param('isis', $score, $comment, $rid, $uid);
+            }
+        );
+        $res->close();
+        $conn->close();
+    }
+    
 }

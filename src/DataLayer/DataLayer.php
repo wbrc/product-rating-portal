@@ -19,4 +19,7 @@ interface DataLayer
     public function getNumRatings($pid);
     public function deleteRating($rid);
     public function deleteProduct($pid);
+    public function updateProduct($pid, $productName, $manufacturer, $uid);
+    public function getRatingById($rid);
+    public function updateRating($rid, $uid, $score, $comment);
 }
